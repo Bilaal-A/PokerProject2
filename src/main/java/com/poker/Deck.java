@@ -18,6 +18,22 @@ public class Deck {
         this.fullDeck = new ArrayList<Card>(deck);
     }
 
+    public void dealCards(ArrayList<Player> players, Board board) {
+        for(Player p : players) {
+            p.setPocket1(deck.remove(randomDeckIndex()));
+            p.setPocket2(deck.remove(randomDeckIndex()));
+        }
+        board.setFlop1(deck.remove(randomDeckIndex()));
+        board.setFlop2(deck.remove(randomDeckIndex()));
+        board.setFlop3(deck.remove(randomDeckIndex()));
+        board.setTurn(deck.remove(randomDeckIndex()));
+        board.setRiver(deck.remove(randomDeckIndex()));
+    }
+
+    private int randomDeckIndex() {
+        return (int) (Math.random() * deck.size());
+    }
+
     @Override
     public String toString() {
         String output = "";
