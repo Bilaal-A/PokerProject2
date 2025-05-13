@@ -47,8 +47,48 @@ public class Card {
         this.id = this.face.substring(0,1) + this.suit.substring(0,1);
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public String getSuit() {
+        return suit;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public String getFace() {
+        return face;
+    }
+
+    public String getSuitIcon() {
+        return suitIcon;
+    }
+
+    public void setFace(String face) {
+        this.face = face;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setSuit(String suit) {
+        this.suit = suit;
+    }
+
+    public void setSuitIcon(String suitIcon) {
+        this.suitIcon = suitIcon;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
+
     @Override
     public String toString() {
-        return this.face + " of " + this.suit + this.suitIcon;
+        return this.suitIcon + " " + this.face + " of " + this.suit + " " + this.suitIcon;
     }
 }

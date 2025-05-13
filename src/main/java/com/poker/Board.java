@@ -1,14 +1,60 @@
 package com.poker;
 
+import java.util.ArrayList;
+
 public class Board {
     private Card flop1;
     private Card flop2;
     private Card flop3;
     private Card turn;
     private Card river;
+    private int stage = 0;
+    private int pot = 0;
+    private int smallBlind;
+    private int bigBlind;
+    private ArrayList<Player> players;
 
-    public Board() {
+    public Board(ArrayList<Player> players) {
+        this.players = players;
+        this.smallBlind = 10;
+        this.bigBlind = 20;
+        collectBlinds();
+    }
+    public Board(ArrayList<Player> players, int smallBlind) {
+        this.players = players;
+        this.smallBlind = smallBlind;
+        this.bigBlind = 2*smallBlind;
+        collectBlinds();
+    }
 
+    public Board(ArrayList<Player> players, int smallBlind, int bigBlind) {
+        this.players = players;
+        this.smallBlind = smallBlind;
+        this.bigBlind = bigBlind;
+        collectBlinds();
+    }
+
+    public int getStage() {
+        return stage;
+    }
+
+    @Override
+    public String toString() {
+        if(stage == 0) {
+            return "| HIDDEN | HIDDEN | HIDDEN | HIDDEN | HIDDEN |";
+        }
+        else if(stage == 1) {
+            return " | " + flop1 + " | " + flop2 + " | " + flop3 + " | HIDDEN | HIDDEN";
+        }
+        else if(stage == 2) {
+            return " | " + flop1 + " | " + flop2 + " | " + flop3 + " | " + turn + " | HIDDEN";
+        }
+        else if(stage == 3) {
+            return " | " + flop1 + " | " + flop2 + " | " + flop3 + " | " + turn + " | " + river;
+        }
+        else {
+            return "ERROR: Problem In Printing Board";
+        }
     }
 
     public Card getFlop1() {
@@ -49,5 +95,31 @@ public class Board {
 
     public void setRiver(Card river) {
         this.river = river;
+    }
+
+    public void updateStage() {
+        stage++;
+    }
+
+    public void nextDealer() {
+        players.add(players.remove(0));
+    }
+
+    private void collectBlinds() {
+        players.get(1).withdrawal(this.smallBlind);
+        players.get(2).withdrawal(this.bigBlind);
+        this.pot += smallBlind + bigBlind;
+    }
+
+    public int getPot() {
+        return pot;
+    }
+
+    public void setPot(int pot) {
+        this.pot = pot;
+    }
+
+    public void increasePot(int deposit) {
+        this.pot += deposit;
     }
 }
