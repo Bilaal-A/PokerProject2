@@ -1,14 +1,14 @@
 package com.poker;
 
 public class Card {
-    private int value;
+    private int priority;
     private String suit;
     private String suitIcon;
     private String face;
     private String id;
 
-    public Card(int value, String suit) {
-        this.value = value;
+    public Card(int priority, String suit) {
+        this.priority = priority;
         this.suit = suit;
         if(suit.equals("Clubs")) {
             suitIcon = "☘️️";
@@ -26,19 +26,19 @@ public class Card {
         else {
             suitIcon = "⚠️";
         }
-        if(value >= 2 && value <= 10) {
-            face = "" + value;
+        if(priority >= 2 && priority <= 10) {
+            face = "" + priority;
         }
-        else if(value == 11) {
+        else if(priority == 11) {
             face = "Jack";
         }
-        else if(value == 12) {
+        else if(priority == 12) {
             face = "Queen";
         }
-        else if(value == 13) {
+        else if(priority == 13) {
             face = "King";
         }
-        else if(value == 14) {
+        else if(priority == 14) {
             face = "Ace";
         }
         else {
@@ -55,8 +55,8 @@ public class Card {
         return suit;
     }
 
-    public int getValue() {
-        return value;
+    public int getPriority() {
+        return priority;
     }
 
     public String getFace() {
@@ -83,8 +83,29 @@ public class Card {
         this.suitIcon = suitIcon;
     }
 
-    public void setValue(int value) {
-        this.value = value;
+    public String getFace(int priority) {
+        if(priority <=10) {
+            return "" + priority;
+        }
+        else if(priority == 11) {
+            return "Jack";
+        }
+        else if(priority == 12) {
+            return "Queen";
+        }
+        else if(priority == 13) {
+            return "King";
+        }
+        else if(priority == 14) {
+            return "Ace";
+        }
+        else {
+            return "ERROR In getFace Method";
+        }
+    }
+
+    public void setPriority(int priority) {
+        this.priority = priority;
     }
 
     @Override

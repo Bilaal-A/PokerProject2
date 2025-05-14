@@ -61,6 +61,10 @@ public class Board {
         return flop1;
     }
 
+    public void setStage(int stage) {
+        this.stage = stage;
+    }
+
     public void setFlop1(Card flop1) {
         this.flop1 = flop1;
     }

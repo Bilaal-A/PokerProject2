@@ -14,11 +14,20 @@ public class Main {
         deck.dealCards(players, board);
         for(Player p : players) {
             p.setBoard(board);
+            p.setDeck(deck);
         }
         Player player1 = players.get(0);
-        System.out.println(player1);
 
-        System.out.println(board);
+        for(int i = 0; i<4; i++) {
+            for (Player p: players) {
+                System.out.println(p);
+                System.out.println();
+            }
+            System.out.println(board);
+            System.out.println();
+            board.updateStage();
+        }
+
     }
 
 //    public static void createPlayers() {
