@@ -10,30 +10,25 @@ public class Player {
     private Card pocket1;
     private Card pocket2;
     private String name;
-    private double riskPercent;
-
     private int money;
     private Board board;
+    private int pot;
     private String bestHand;
     private double bestHandPriority;
     private Deck deck;
+
 
     public Player(String name) {
         this.name = name;
         this.money = 1000;
     }
 
-    public Player(String name, double riskPercent, int money) {
+    public Player(String name, int money) {
         this.name = name;
-        this.riskPercent = riskPercent;
         this.money = money;
     }
 
-    public Player(String name, double riskPercent) {
-        this.name = name;
-        this.riskPercent = riskPercent;
-        this.money = 1000;
-    }
+
 
     public void setDeck(Deck deck) {
         this.deck = deck;
@@ -49,6 +44,42 @@ public class Player {
         return highestCard;
     }
 
+    public Card getPocket1() {
+        return pocket1;
+    }
+
+    public Card getPocket2() {
+        return pocket2;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
+    public Board getBoard() {
+        return board;
+    }
+
+    public String getBestHand() {
+        return bestHand;
+    }
+
+    public void setBestHand(String bestHand) {
+        this.bestHand = bestHand;
+    }
+
+    public void setBestHandPriority(double bestHandPriority) {
+        this.bestHandPriority = bestHandPriority;
+    }
+
+    public Deck getDeck() {
+        return deck;
+    }
 
     public String getFace(int priority) {
         if(priority <=10) {
@@ -71,9 +102,13 @@ public class Player {
         }
     }
 
+    public void addMoney(int winnings) {
+        money += winnings;
+    }
+
     @Override
     public String toString() {
-        return name.toUpperCase() + "'S STATS\n" + pocket1 + "\n" + pocket2 + "\n" + "Best Hand: " + bestHand();
+        return name.toUpperCase() + "'S STATS\n" + pocket1 + "\n" + pocket2 + "\n" + "Best Hand: " + bestHand() + "\nMoney: " + money;
     }
 
     public void setPocket1(Card pocket1) {
@@ -96,6 +131,7 @@ public class Player {
 
     public void setBoard(Board board) {
         this.board = board;
+        this.pot = board.getPot();
     }
 
     public void setMoney(int money) {
@@ -306,7 +342,43 @@ public class Player {
 
     }
 
+
     public double getBestHandPriority() {
         return bestHandPriority;
     }
+
+//    public void myAction(int currentBet) {
+//        int rand = (int) (Math.random() * 2) + 1;
+//        int total = 0;
+//        if(rand == 1) {
+//            total = myBet(currentBet);
+//        }
+//        if(rand != 1 || total == 0) {
+//            boolean doesChecks = myCheck(currentBet);
+//        }
+//    }
+//
+//    private boolean myCheck(int currentBet) {
+//        double perMySum = perOfMyMoneyRisked(currentBet);
+//        if(currentBet == 0) {
+//            return true;
+//        }
+//        if(perMySum <= 75 && bestHandPriority >= 18.1) {
+//
+//        }
+//    }
+
+//    private int myBet(int currentBet) {
+//        double perMySum = (double) (currentBet) / money * 100;
+//    }
+//
+//    private double perOfMyMoneyRisked(int currentBet) {
+//        return (double) (currentBet * 100) / money;
+//    }
+//
+//    private void printCheckStatement() {
+//        System.out.println(name + " checks");
+//    }
+//    private void
+
 }

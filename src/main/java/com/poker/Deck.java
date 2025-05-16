@@ -30,8 +30,25 @@ public class Deck {
         board.setRiver(deck.remove(randomDeckIndex()));
     }
 
+    public void removeCard(Card card) {
+        for(Card c : deck) {
+            if(c.getId() == card.getId()) {
+                deck.remove(c);
+            }
+        }
+    }
+
+    public ArrayList<Card> getDeck() {
+        return deck;
+    }
+
     private int randomDeckIndex() {
         return (int) (Math.random() * deck.size());
+    }
+
+    public void resetDeck() {
+        ArrayList<Card> newDeck = new ArrayList<>(fullDeck);
+        this.deck = newDeck;
     }
 
     @Override

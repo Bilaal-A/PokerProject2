@@ -119,11 +119,50 @@ public class Board {
         return pot;
     }
 
-    public void setPot(int pot) {
+    private void setPot(int pot) {
         this.pot = pot;
     }
 
     public void increasePot(int deposit) {
         this.pot += deposit;
+    }
+
+    public void newGame() {
+        resetBoard();
+        nextDealer();
+    }
+
+    private void resetBoard() {
+        pot = 0;
+        flop1 = null;
+        flop2 = null;
+        flop3 = null;
+        turn = null;
+        river = null;
+        stage = 0;
+    }
+
+    public void declareWinner(){
+        double winningHand = Integer.MIN_VALUE;
+        ArrayList<Player> winningPlayers = new ArrayList<>();
+        for(Player p: players) {
+            if(p.getBestHandPriority() > winningHand) {
+                winningHand = p.getBestHandPriority();
+                winningPlayers.add(p);
+            }
+        }
+        for(int i = 0; i<winningPlayers.size(); i++) {
+            if(winningPlayers.get(i).getBestHandPriority() < winningHand) {
+                winningPlayers.remove(winningPlayers.get(i));
+                i--;
+            }
+        }
+        if(winningPlayers.size() == 1) {
+            Player winner = winningPlayers.get(0);
+            System.out.println(winner.getName() + " Wins!");
+            winner.addMoney(pot);
+            setPot(0);
+        }
+
     }
 }

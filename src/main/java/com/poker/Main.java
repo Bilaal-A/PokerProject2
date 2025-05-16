@@ -4,59 +4,35 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
-    private static ArrayList<Player> players;
 
     public static void main(String[] args) {
-        Deck deck = new Deck();
-        players = new ArrayList<>();
-        adminCreatePlayers();
+        ArrayList<Player> players = new ArrayList<>();
+        players.add(new Player("Adam"));
+        players.add(new Player("Bill"));
+        players.add(new Player("Cameron"));
         Board board = new Board(players);
+        Deck deck = new Deck();
+
+//       runAGame(deck, board, );
+    }
+
+    public static void runAGame(Deck deck, Board board, ArrayList<Player> players) {
+        deck.resetDeck();
+        board.newGame();
         deck.dealCards(players, board);
-        for(Player p : players) {
-            p.setBoard(board);
-            p.setDeck(deck);
-        }
-        Player player1 = players.get(0);
-
-        for(int i = 0; i<4; i++) {
-            for (Player p: players) {
-                System.out.println(p);
-                System.out.println();
-            }
-            System.out.println(board);
+        for(Player p:players) {
+            System.out.println(p);
             System.out.println();
-            board.updateStage();
         }
-
+        while(board.getStage() <= 3) {
+            System.out.println(board);
+            board.updateStage();
+            System.out.println();
+        }
+        for(Player p:players) {
+            System.out.println(p);
+            System.out.println();
+        }
     }
 
-//    public static void createPlayers() {
-//        Scanner scanner = new Scanner(System.in);
-//        System.out.println("Enter Your Name:");
-//        System.out.print("=> ");
-//        String userName = scanner.nextLine();
-//        System.out.println("Buy Chips:");
-//        System.out.print("(1000 Recommended)=> ");
-//        int userMoney = scanner.nextInt();
-//        players.add(new Player(userName, -2, userMoney));
-//        System.out.println("Enter Number Of Opponents:");
-//        System.out.print("(2 Minimum)=> ");
-//        int numOpponents = scanner.nextInt();
-//        if(numOpponents < 2) {
-//            players.add(new Player("John", 50, userMoney));
-//            players.add(new Player("Jane", 50, userMoney));
-//        }
-//        else {
-//            for(int i = 0; i<numOpponents; i++) {
-//                players.add(new Player(""));
-//            }
-//        }
-//    }
-
-    public static void adminCreatePlayers() {
-        players.add(new Player("Bilaal"));
-        players.add(new Player("Cooper"));
-        players.add(new Player("Prokopiy"));
-        players.add(new Player("James"));
-    }
 }
